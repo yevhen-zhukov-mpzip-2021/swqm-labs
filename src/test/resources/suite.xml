@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Parallel Testing Suite">
+    <test name="Parallel Tests" parallel = "methods" thread-count = "11">
+        <classes>
+            <class name="com.lpnu.swqm.services.PersonServiceTest"/>
+            <class name="com.lpnu.swqm.services.BookServiceTest"/>
+            <class name="com.lpnu.swqm.services.BookStoreServiceTest"/>
+            <class name="com.lpnu.swqm.services.EmployeeServiceTest"/>
+            <class name="com.lpnu.swqm.services.CompanyEmployeeServiceTest"/>
+        </classes>
+    </test>
+</suite>

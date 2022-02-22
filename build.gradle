@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "io.freefair.aspectj.post-compile-weaving" version "6.4.0"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.7'
+    implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.7'
+
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.1'
+
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${projectDir}/reports/jacocoReport")
+    }
+}
+
+test {
+    useTestNG() {
+        useDefaultListeners = true
+        outputDirectory = file("$projectDir/reports/testngReport")
+        options.suites("src/test/resources/suite.xml")
+    }
+
+    reports.html.enabled(false)
+
+    testLogging.showStandardStreams = true
+
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}
