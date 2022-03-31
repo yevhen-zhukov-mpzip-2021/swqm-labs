@@ -10,7 +10,7 @@ public class CompanyEmployee extends Employee {
 
     private final Department department;
 
-    @Builder (builderMethodName = "companyBuilder")
+    @Builder(builderMethodName = "companyBuilder")
     public CompanyEmployee(LocalDateTime bornDate, String firstName, String lastName, String taxId, String profession, Department department) {
         super(bornDate, firstName, lastName, taxId, profession);
         this.department = department;
